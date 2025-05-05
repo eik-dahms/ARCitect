@@ -81,7 +81,7 @@ interface StatusMessage{
 const get_datahubs = async ()=>{
   AppProperties.datahub_hosts_by_provider = await window.ipc.invoke('DataHubService.getHosts');
   AppProperties.datahub_hosts = AppProperties.datahub_hosts_by_provider.dataplant.concat(AppProperties.datahub_hosts_by_provider.additional);
-  
+
   // setup hosts
   // each will be assigned a default status message connecting
   // once the server is checked, the status will be updated asynchronously
@@ -89,8 +89,8 @@ const get_datahubs = async ()=>{
   // Additionally, this prevents the UI from freezing if a connection
   // to a server takes a bit longer, produces an unprocessed error
   for (let host of AppProperties.datahub_hosts) {
-    
-    // default status - connecting to server  
+
+    // default status - connecting to server
     AppProperties.datahub_hosts_msgs[host] = [{
       message: 'connecting to server',
       critical: false,
@@ -98,7 +98,7 @@ const get_datahubs = async ()=>{
       starts_at: new Date().toISOString(),
       status: DATAHUB_STATUS.PROBING
     } as StatusMessage];
-    
+
     // async server check update status when finished
     window.ipc.invoke('InternetService.getWebPageAsJson', {
          host: host,
@@ -115,7 +115,7 @@ const get_datahubs = async ()=>{
             status: DATAHUB_STATUS.ERROR
           })
         }
-        
+
         else {
           for (let msg of response) {
             const t = msg.message.toLowerCase();
@@ -124,7 +124,7 @@ const get_datahubs = async ()=>{
               msg.status = DATAHUB_STATUS.DOWNTIME;
             }else if (t.includes('maintenance')) {
               msg.status = DATAHUB_STATUS.MAINTENANCE;
-            } else { 
+            } else {
               msg.status = DATAHUB_STATUS.OK;
             }
             messages.push(msg);
@@ -142,7 +142,7 @@ const addDataHub = async (host: string, cred: any)=>{
   try{
     await window.ipc.invoke('DataHubService.addHost', [host, cred]);
   }catch(e){
-    // not sure where to put this error? 
+    // not sure where to put this error?
     // inform user with toast?
     console.log(e);
   }finally{

@@ -18,7 +18,6 @@ const add_dialog = ref(false);
 
 <template>
     <q-list>
-        
       <!-- Host list header-->
       <q-item>
         <q-item-section class="text-grey text-bold">
@@ -28,8 +27,8 @@ const add_dialog = ref(false);
         <!-- Add Service Button -->
         <q-item-section v-if='editable' side>
             <q-btn flat @click="add_dialog=true" color="secondary" size="sm">
-                <q-label>Add Service {{x}}</q-label>
-                <q-tooltip anchor="top middle" self="bottom middle">Add a new service.</q-tooltip>
+              Add Service
+              <q-tooltip anchor="top middle" self="bottom middle">Add a new service.</q-tooltip>
             </q-btn>
         </q-item-section>
       </q-item>
@@ -37,9 +36,9 @@ const add_dialog = ref(false);
 
       <!-- list of hosts-->
       <div v-for='host in hosts'>
-        <HostListEntry :hostname="host" 
-                       :messages="hostmessages[host]" 
-                       :show_old_msgs="show_old_msgs" 
+        <HostListEntry :hostname="host"
+                       :messages="hostmessages[host]"
+                       :show_old_msgs="show_old_msgs"
                        :editable="editable"/>
         <q-separator />
       </div>
