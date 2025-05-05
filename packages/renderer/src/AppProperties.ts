@@ -1,5 +1,4 @@
 import { reactive, watch } from 'vue'
-import App from './App.vue';
 
 interface Config {
   gitDebug: boolean,
@@ -36,7 +35,7 @@ const AppProperties: {
   state: 0,
 
   user: null,
-  
+
 
   datahub_hosts : {},
   datahub_hosts_by_provider: {},

@@ -18,6 +18,7 @@ const add_dialog = ref(false);
 
 <template>
     <q-list>
+
       <!-- Host list header-->
       <q-item>
         <q-item-section class="text-grey text-bold">
